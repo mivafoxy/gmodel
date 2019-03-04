@@ -1,0 +1,69 @@
+classdef list < handle
+    
+    properties
+       	parts
+        len
+    end
+    
+    methods
+        function obj = list()
+            obj.len = 0;
+            obj.parts = [];
+        end
+        
+        function add(obj,part)
+            obj.len = obj.len + 1;
+            obj.parts = [obj.parts part];
+        end
+        
+        
+        function check(obj,lambda)
+            deleteIndex = [];
+            for i = 1:1:obj.len
+                a = obj.parts(i);
+                if a.type == 'n'
+                    for j = (i + 1):1:obj.len
+                    
+                     b = obj.parts(j);
+                    
+                        if sqrt(sum((a.r-b.r).*(a.r-b.r))) < 2
+                            if (b.type == 'm')
+                                nextStep = a.probe(lambda);
+                            else
+                                nextStep = -1;
+                            end
+                            switch nextStep
+                                case 1
+                                    a.velocity = a.velocity;
+                                case 2
+                                    obj.parts(i) = [];
+                                    i = i - 1;
+                                    j = j - 1;
+                                    obj.len = obj.len - 1;
+                                case 3
+                                    obj.parts(j) = [];
+                                    obj.parts(i) = [];
+                                    i = i - 1;
+                                    j = j - 2;
+                                    obj.len = obj.len - 2;
+                                    obj.add(part(a.r,'n'));
+                                    obj.add(part(a.r,'n'));
+                            end
+                        end
+                    else
+                        continue;
+                    end
+                   
+                end
+            end
+            
+            
+        end
+        function nextStep(obj)
+            for i=1:numel(obj.parts)
+                obj.parts(i).nextStep();
+            end
+        end
+    end
+end
+

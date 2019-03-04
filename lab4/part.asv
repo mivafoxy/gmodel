@@ -1,0 +1,25 @@
+classdef part > hab
+
+    properties
+        velocity
+        r
+        ph
+    end
+    
+    methods
+        function obj = part(r)
+            obj.r = r;
+            a = rand(1,3)*2 - 1;
+            obj.velocity = a/norm(a);
+            
+            obj.ph = plot3(r(1),r(2),r(3),'o');
+           
+        end
+        
+        function nextStep(obj)
+            obj.r = obj.r + obj.velocity
+            set(obj.ph,'Zdata',obj.r(1),'XData',obj.r(2),'YData',obj.r(3));
+        end
+    end
+end
+
