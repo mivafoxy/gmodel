@@ -1,9 +1,10 @@
 
-N = 100;
-Nd = 10;
-Tn = 100;
+N = 1000;
+Nd = 5;
+Tn = 10;
 Tk = 1000;
-allQ = createTasks(N);
+lambda = 10;
+allQ = createTasks(N, lambda);
 q = queue;
 
 d = createDevices(Nd,Tn,Tk);
