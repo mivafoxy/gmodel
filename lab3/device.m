@@ -1,20 +1,20 @@
 classdef device < handle
     properties
-        Tn
-        Tk
+        intervalStart
+        intervalEnd
         timeStart
         timeEnd
     end
     methods       
-        function obj = device(Tn,Tk)
-            obj.Tn = Tn;
-            obj.Tk = Tk;
+        function obj = device(intervalStart,intervalEnd)
+            obj.intervalStart = intervalStart;
+            obj.intervalEnd = intervalEnd;
             obj.timeStart = 0;
             obj.timeEnd = 0;
         end
         function time = run(obj,task,currentTime)
             r = rand;
-            p = r*(obj.Tk - obj.Tn) + obj.Tn;
+            p = r*(obj.intervalEnd - obj.intervalStart) + obj.intervalStart;
             time = p - mod(p,1);
             %fprintf('Run task %d\n',task.id);
             
