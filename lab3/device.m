@@ -14,7 +14,7 @@ classdef device < handle
         end
         function time = run(obj,task,currentTime) % Моделирование исполнения заявки.
             r = rand;
-            p = r*(obj.intervalEnd - obj.intervalStart) + obj.intervalStart;
+            p = r*(obj.intervalEnd - obj.intervalStart) + obj.intervalStart; % Это явно связано с абзацем перед заданием в лабнике.
             time = p - mod(p,1);
             %fprintf('Run task %d\n',task.id);
             
