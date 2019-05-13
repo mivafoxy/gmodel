@@ -24,7 +24,7 @@ classdef queue < handle
                 minId = obj.tasks(ind).id;
                 
                 for i=1:1:len
-                    nextId = obj.tasks(i).id;
+                    nextId = obj.tasks(i).id; % Поиск идёт по приоритету "у кого индекс меньше - тот и выйграл". Это модель FIFO.
                     if  nextId < minId
                         minId = nextId;
                         ind = i;
@@ -33,7 +33,7 @@ classdef queue < handle
                 
                 task = obj.tasks(ind);
                 if task.start > time && time ~= -1
-                    flag = 0;
+                    flag = 0; % Заявку хоть и нашли, но она утратила свою актуальность.
                 else
                     obj.tasks(ind) = [];
                     flag = 1;

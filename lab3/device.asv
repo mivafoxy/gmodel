@@ -12,7 +12,7 @@ classdef device < handle
             obj.timeStart = 0;
             obj.timeEnd = 0;
         end
-        function time = run(obj,task,currentTime) % Моделирование исполнения заявки.
+        function time = run(obj,task,currentTime) % Модели
             r = rand;
             p = r*(obj.intervalEnd - obj.intervalStart) + obj.intervalStart;
             time = p - mod(p,1);
