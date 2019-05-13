@@ -7,12 +7,15 @@ lambda = 2;
 param_l = [];
 param_names = ["Waiting length","Max queue","Prostoi","Waiting time","Time in system"];
 param_label = ["wt","mq","p","wt","tis"];
+% 
+% for Nd = 1:1:30
+%     [wl,mq,p,wt,tis] = model(N,Nd,Tn,Tn+interval,lambda);
+%     param_l = [ param_l;Nd, wl,mq,p,wt,tis]; 
+%  
+% end
 
-for Nd = 1:1:30
-    [wl,mq,p,wt,tis] = model(N,Nd,Tn,Tn+interval,lambda);
-    param_l = [ param_l;Nd, wl,mq,p,wt,tis]; 
- 
-end
+calcService = calculationService;
+[wl,mq,p,wt,tis,param_l] = calcService.callModelWithIncreasingDeviceCount(N, Tn, lambda);
 
 figure;
 grid on;

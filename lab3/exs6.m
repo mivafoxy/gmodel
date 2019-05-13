@@ -8,11 +8,8 @@ param_l = [];
 param_names = ["Waiting length","Max queue","Prostoi","Waiting time","Time in system"];
 param_label = ["wt","mq","p","wt","tis"];
 
-for interval = 1:1:30
-    [wl,mq,p,wt,tis] = model(N,Nd,Tn,Tn+interval,lambda);
-    param_l = [ param_l;interval, wl,mq,p,wt,tis]; 
- 
-end
+calcService = calculationService;
+[wl,mq,p,wt,tis,param_l] = calcService.callModelWithIncreasingInterval(N, Nd, Tn, lambda);
 
 figure;
 grid on;

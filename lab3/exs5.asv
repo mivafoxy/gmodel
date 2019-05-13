@@ -5,11 +5,14 @@ Tn = 10;
 Tk = Tn + 10;
 
 param_l = [];
-param_names = ["Средняя длина очереди","Максимальная длина очереди","Простой","Среднее время ожидания","Среднее время нахождения заявки в системе"];
+param_names = ["Среднее время нахождение заявки в системе","Максимальная длина в очереди","Prostoi","Waiting time","Time in system"];
 param_label = ["wt","mq","p","wt","tis"];
 
-calcService = calculationService;
-[wl,mq,p,wt,tis, param_l] = calcService.callModelWithIncreasingFlow(N, Nd, Tn);
+for lambda = 0.1:0.1:10
+    [wl,mq,p,wt,tis] = model(N,Nd,Tn,Tn+10,lambda);
+    param_l = [ param_l;lambda, wl,mq,p,wt,tis]; 
+ 
+end
 
 figure;
 grid on;
