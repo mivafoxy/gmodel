@@ -4,7 +4,7 @@ classdef calculationService
         function [wl,mq,p,wt,tis, param_l] = callModelWithIncreasingFlow(obj, N,Nd,Tn)
             param_l = [];
             for lambda = 0.1:0.1:10
-                [wl,mq,p,wt,tis] = model(N,Nd,Tn,Tn+10,lambda);
+                [wl,mq,p,wt,tis] = model(N,Nd,Tn,Tn+10,lambda,0);
                 param_l = [ param_l;lambda, wl,mq,p,wt,tis]; 
             end
         end
@@ -13,7 +13,7 @@ classdef calculationService
         function [wl,mq,p,wt,tis, param_l] = callModelWithIncreasingInterval(obj, N,Nd,Tn, lambda)
             param_l = [];
             for interval = 1:1:30
-                [wl,mq,p,wt,tis] = model(N,Nd,Tn,Tn+interval,lambda);
+                [wl,mq,p,wt,tis] = model(N,Nd,Tn,Tn+interval,lambda, 0);
                 param_l = [ param_l;interval, wl,mq,p,wt,tis];  
             end
         end 
@@ -22,7 +22,7 @@ classdef calculationService
         function [wl,mq,p,wt,tis, param_l] = callModelWithIncreasingDeviceCount(obj, N,Tn, lambda)
             param_l = [];
             for Nd = 1:1:30
-                [wl,mq,p,wt,tis] = model(N,Nd,Tn,Tn+10,lambda);
+                [wl,mq,p,wt,tis] = model(N,Nd,Tn,Tn+10,lambda, 0);
                 param_l = [ param_l;Nd, wl,mq,p,wt,tis]; 
             end
         end

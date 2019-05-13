@@ -1,4 +1,7 @@
-function [wl,mq,p,wt,tis] = model(N,Nd,Tn,Tk,lambda, hasToDisplay)
+function [wl,mq,p,wt,tis, x] = model(N,Nd,Tn,Tk,lambda, hasToDisplay)
+
+true = 1;
+false = 0;
 
 allQ = createTasks(N,lambda);
 q = queue;
@@ -64,24 +67,28 @@ for i=1:1:Nd
     end
 end
 
-wl = waiting / time;
-mq = maxQ;
-p = prostoi / time;
-wt = waiting / N;
-tis = (waiting+workTime) / N;
+if hasToDisplay == 1
 
-    if hasToDisplay == 1
-        % средняя длина очереди
-        fprintf('Cредняя длина очереди %f \n',wl);    
-        % максимальная длина очереди
-        fprintf('Максимальная длина очереди %f \n',maxQ);    
-        % простой
-        fprintf("Простой %f \n",p);
-        % среднее время ожидания
-        fprintf('Cреднее время ожидания %f \n',wt);    
-        % среднее время нахождения заявки в системе
-        fprintf('Cреднее время нахождения заявки в системе %f \n',tis);
-    end
-    
+    wl = waiting / time;
+    % средняя длина очереди
+    fprintf('Cредняя длина очереди %f \n',wl);
+
+    mq = maxQ;
+    % средняя длина очереди
+    fprintf('Максимальная длина очереди %f \n',maxQ);
+
+    p = prostoi / time;
+    % простой
+    fprintf("Простой %f \n",p);
+
+    wt = waiting / N;
+    % среднее время ожидания
+    fprintf('Cреднее время ожидания %f \n',wt);
+
+    tis = (waiting+workTime) / N;
+    % среднее время нахождения заявки в системе
+    fprintf('Cреднее время нахождения заявки в системе %f \n',tis);
+
+end
 end
 
